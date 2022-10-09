@@ -1,0 +1,8 @@
+.elements__trash-btn {
+    background: url(../../../images/mesto-elements__trash.svg) no-repeat center / cover;
+    width: 18px;
+    height: 19px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}

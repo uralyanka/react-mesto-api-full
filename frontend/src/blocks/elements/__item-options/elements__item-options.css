@@ -1,0 +1,6 @@
+.elements__item-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0 0 21px;
+}

@@ -1,0 +1,10 @@
+.auth-form__input-container {
+  border: none;
+  padding: 0;
+}
+
+@media (max-width: 425px) {
+  .auth-form__input-container {
+    padding: 0 30px;
+  }
+}

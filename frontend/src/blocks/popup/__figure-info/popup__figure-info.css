@@ -1,0 +1,12 @@
+.popup__figure-info {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    width: 358px;
+    padding: 60px 36px;
+    background: #FFF;
+    color: #000;
+    text-align: center;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}

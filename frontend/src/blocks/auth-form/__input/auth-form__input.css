@@ -1,0 +1,17 @@
+.auth-form__input {
+    background-color: transparent;
+    color: #FFF;
+    border: none;
+    border-bottom: 2px solid #CCCCCC;
+    width: 100%;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 1.2;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0 0 13px;
+ }
+
+ .auth-form__input:first-child {
+    margin-bottom: 30px;
+}

@@ -1,0 +1,11 @@
+.elements__like-btn {
+   min-width: 22px;
+   height: 19px;
+   margin: 0 20px 3px;
+   background: url(../../../images/mesto-elements__nolike.svg) no-repeat center / cover;
+   transition: opacity .4s ease;
+}
+
+.elements__like-btn:hover {
+   opacity: .5;
+}

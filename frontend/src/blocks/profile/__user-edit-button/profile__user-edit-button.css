@@ -1,0 +1,16 @@
+.profile__user-edit-button {
+    background-image: url(../../../images/mesto-profile__edit-button.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #fff;
+    margin: auto 0;
+}
+
+@media (max-width: 462px) {
+    .profile__user-edit-button {
+        width: 18px;
+        height: 18px;
+    }
+}

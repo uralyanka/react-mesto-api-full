@@ -1,0 +1,22 @@
+.popup__close-btn {
+    background: url(../../../images/mesto-popup-form__close.svg) no-repeat center / cover;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    right: -40px;
+    top: -40px;
+}
+
+@media (max-width: 600px) {
+    .popup__close-btn {
+        right: 0;
+    }
+}
+
+@media (max-width: 425px) {
+    .popup__close-btn {
+        width: 20px;
+        height: 20px;
+        top: -36px;
+    }
+}
