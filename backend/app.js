@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -6,8 +7,6 @@ const { errors } = require('celebrate');
 const NotFoundError = require('./errors/notFoundError');
 const auth = require('./middlewares/auth');
 const errorsHandler = require('./middlewares/errorsHandler');
-// Удалено минимальное значение для валидации пароля
-// Вынесена функция обработки ошибок в отдельный файл errorsHandler
 
 const { PORT = 3000 } = process.env;
 
