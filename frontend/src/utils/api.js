@@ -1,4 +1,3 @@
-//изменила название файла + шаблонные строки
 class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -15,78 +14,77 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  getUserData() {
+  getUserData(token) {
     return fetch(this._userUrl, {
       method: "GET",
-      headers: this._headers,
+      headers: { ...this._headers, authorization: `Bearer ${token}` },
     }).then((res) => this._checkRes(res));
   }
 
-  getCards() {
+  getCards(token) {
     return fetch(this._cardsUrl, {
       method: "GET",
-      headers: this._headers,
+      headers: { ...this._headers, authorization: `Bearer ${token}` },
     }).then((res) => this._checkRes(res));
   }
 
-  setUserData(name, about) {
+  setUserData(formData, token) {
     return fetch(this._userUrl, {
       method: "PATCH",
-      headers: this._headers,
+      headers: { ...this._headers, authorization: `Bearer ${token}` },
       body: JSON.stringify({
-        name,
-        about,
+        name: formData.name,
+        about: formData.about,
       }),
     }).then((res) => this._checkRes(res));
   }
 
-  addCard(cardData) {
+  addCard(formData, token) {
     return fetch(this._cardsUrl, {
       method: "POST",
-      headers: this._headers,
+      headers: { ...this._headers, authorization: `Bearer ${token}` },
       body: JSON.stringify({
-        name: cardData.cardName,
-        link: cardData.cardLink,
+        name: formData.name,
+        link: formData.link,
       }),
     }).then((res) => this._checkRes(res));
   }
 
-  deleteCard(cardId) {
+  deleteCard(cardId, token) {
     return fetch(`${this._cardsUrl}/${cardId}`, {
       method: "DELETE",
-      headers: this._headers,
+      headers: { ...this._headers, authorization: `Bearer ${token}` },
     }).then((res) => this._checkRes(res));
   }
 
-  likeSwitcher(cardId, isLiked) {
+  likeSwitcher(cardId, isLiked, token) {
     if (isLiked) {
       return fetch(`${this._cardsUrl}/${cardId}/likes`, {
         method: "DELETE",
-        headers: this._headers,
+        headers: { ...this._headers, authorization: `Bearer ${token}` },
       }).then((res) => this._checkRes(res));
     } else {
       return fetch(`${this._cardsUrl}/${cardId}/likes`, {
         method: "PUT",
-        headers: this._headers,
+        headers: { ...this._headers, authorization: `Bearer ${token}` },
       }).then((res) => this._checkRes(res));
     }
   }
 
-  updateAvatar(avatar) {
+  updateAvatar(formData, token) {
     return fetch(`${this._userUrl}/avatar`, {
       method: "PATCH",
-      headers: this._headers,
+      headers: { ...this._headers, authorization: `Bearer ${token}` },
       body: JSON.stringify({
-        avatar,
+        avatar: formData.avatar,
       }),
     }).then((res) => this._checkRes(res));
   }
 }
 
 export default new Api({
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-44",
+  baseUrl: "api.uralyanka.mesto.nomoredomains.icu",
   headers: {
-    authorization: "552f6cf5-9624-4487-82c3-a3748eda88d5",
     "Content-Type": "application/json",
   },
 });

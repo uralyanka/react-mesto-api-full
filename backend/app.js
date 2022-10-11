@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const NotFoundError = require('./errors/notFoundError');
 const auth = require('./middlewares/auth');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorsHandler = require('./middlewares/errorsHandler');
 
 const { PORT = 3000 } = process.env;
@@ -18,7 +19,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+app.use(requestLogger);
+
 app.use('/', require('./routes'));
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.use(auth);
 
@@ -28,6 +37,8 @@ app.use('/cards', require('./routes/cards'));
 app.all('/*', (req, res, next) => {
   next(new NotFoundError('Неправильный путь'));
 });
+
+app.use(errorLogger);
 
 app.use(errors());
 app.use(errorsHandler);
