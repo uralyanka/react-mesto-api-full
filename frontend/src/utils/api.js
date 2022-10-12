@@ -14,76 +14,84 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  getUserData(token) {
+  getUserData() {
     return fetch(this._userUrl, {
       method: "GET",
-      headers: { ...this._headers, authorization: `Bearer ${token}` },
+      credentials: 'include',
+      headers: this._headers,
     }).then((res) => this._checkRes(res));
   }
 
-  getCards(token) {
+  getCards() {
     return fetch(this._cardsUrl, {
       method: "GET",
-      headers: { ...this._headers, authorization: `Bearer ${token}` },
+      credentials: 'include',
+      headers: this._headers,
     }).then((res) => this._checkRes(res));
   }
 
-  setUserData(formData, token) {
+  setUserData(name, about) {
     return fetch(this._userUrl, {
       method: "PATCH",
-      headers: { ...this._headers, authorization: `Bearer ${token}` },
+      credentials: 'include',
+      headers: this._headers,
       body: JSON.stringify({
-        name: formData.name,
-        about: formData.about,
+        name,
+        about,
       }),
     }).then((res) => this._checkRes(res));
   }
 
-  addCard(formData, token) {
+  addCard(cardData) {
     return fetch(this._cardsUrl, {
       method: "POST",
-      headers: { ...this._headers, authorization: `Bearer ${token}` },
+      credentials: 'include',
+      headers: this._headers,
       body: JSON.stringify({
-        name: formData.name,
-        link: formData.link,
+        name: cardData.cardName,
+        link: cardData.cardLink,
       }),
     }).then((res) => this._checkRes(res));
   }
 
-  deleteCard(cardId, token) {
+  deleteCard(cardId) {
     return fetch(`${this._cardsUrl}/${cardId}`, {
       method: "DELETE",
-      headers: { ...this._headers, authorization: `Bearer ${token}` },
+      headers: this._headers,
+      credentials: 'include'
     }).then((res) => this._checkRes(res));
   }
 
-  likeSwitcher(cardId, isLiked, token) {
+  likeSwitcher(cardId, isLiked) {
     if (isLiked) {
       return fetch(`${this._cardsUrl}/${cardId}/likes`, {
         method: "DELETE",
-        headers: { ...this._headers, authorization: `Bearer ${token}` },
+        credentials: 'include',
+        headers: this._headers,
       }).then((res) => this._checkRes(res));
     } else {
       return fetch(`${this._cardsUrl}/${cardId}/likes`, {
         method: "PUT",
-        headers: { ...this._headers, authorization: `Bearer ${token}` },
+        credentials: 'include',
+        headers: this._headers,
       }).then((res) => this._checkRes(res));
     }
   }
 
-  updateAvatar(formData, token) {
+  updateAvatar(avatar) {
     return fetch(`${this._userUrl}/avatar`, {
       method: "PATCH",
-      headers: { ...this._headers, authorization: `Bearer ${token}` },
+      credentials: 'include',
+      headers: this._headers,
       body: JSON.stringify({
-        avatar: formData.avatar,
+        avatar,
       }),
     }).then((res) => this._checkRes(res));
   }
 }
 
 export default new Api({
-  baseUrl: "api.uralyanka.mesto.nomoredomains.icu",
+  baseUrl: "https://api.uralyanka.mesto.nomoredomains.icu",
   headers: {
     "Content-Type": "application/json",
   },

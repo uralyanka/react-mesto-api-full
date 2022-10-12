@@ -1,4 +1,4 @@
-const baseAuthUrl = "api.uralyanka.mesto.nomoredomains.icu";
+const baseAuthUrl = "https://api.uralyanka.mesto.nomoredomains.icu";
 
 function checkRes(res) {
   if (res.ok) {
@@ -11,8 +11,8 @@ function checkRes(res) {
 export function register({ email, password }) {
   return fetch(`${baseAuthUrl}/signup`, {
     method: "POST",
+    credentials: 'include',
     headers: {
-      'Accept': 'application/json',
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
@@ -22,21 +22,20 @@ export function register({ email, password }) {
 export function signin({ email, password }) {
   return fetch(`${baseAuthUrl}/signin`, {
     method: "POST",
+    redentials: 'include',
     headers: {
-      'Accept': 'application/json',
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
   }).then((res) => checkRes(res));
 }
 
-export function getContent(token) {
+export function getContent() {
   return fetch(`${baseAuthUrl}/users/me`, {
     method: "GET",
+    credentials: 'include',
     headers: {
-      'Accept': 'application/json',
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
     },
   }).then((res) => checkRes(res))
 }

@@ -25,9 +25,9 @@ export default function App() {
     setIsInfoPopupOpen(false);
   }
 
-  function handleRegister({ email, password }) {
+  function handleRegister(userRegisterData) {
     auth
-      .register({ email, password })
+      .register(userRegisterData)
       .then((res) => {
         setUserData(res.data);
         navigate("/");
@@ -43,7 +43,7 @@ export default function App() {
       });
   }
 
-  function handleLogin({ email, password }) {
+  function handleLogin(email, password) {
     auth
       .signin({ email, password })
       .then((res) => {
@@ -65,26 +65,23 @@ export default function App() {
       });
   }
 
-  //реализовала аутентификацию при повторном входе
+  //аутентификация при повторном входе
   function handleCheckToken() {
-    const token = localStorage.getItem("token");
-    if (token) {
-      auth
-        .getContent(token)
-        .then((res) => {
+    auth
+      .getContent()
+        .then(() => {
           setLoggedIn(true);
-          setUserData(res.data);
           navigate("/");
         })
         .catch((err) => {
+          navigate("/sign-in");
           if (err === "Ошибка: 400")
             return console.log("Токен не передан или передан не в том формате");
           if (err === "Ошибка: 401")
             return console.log("Переданный токен некорректен");
           console.log(err);
         });
-    }
-  }
+  };
 
   useEffect(() => {
     handleCheckToken();
