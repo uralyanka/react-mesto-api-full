@@ -39,3 +39,13 @@ export function getContent() {
     },
   }).then((res) => checkRes(res))
 }
+
+export function signout() {
+  return fetch(`${baseAuthUrl}/signout`, {
+      method: "POST",
+      credentials:'include',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+    }).then((res) => checkRes(res))
+};

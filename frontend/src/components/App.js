@@ -29,7 +29,7 @@ export default function App() {
     auth
       .register(userRegisterData)
       .then((res) => {
-        setUserData(res.data);
+        setUserData(res.email);
         navigate("/");
         setIsSuccessRegister(true);
         setIsInfoPopupOpen(true);
@@ -45,14 +45,11 @@ export default function App() {
 
   function handleLogin(email, password) {
     auth
-      .signin({ email, password })
+      .signin(email, password)
       .then((res) => {
-        if (res.token) {
           setLoggedIn(true);
-          localStorage.setItem("token", res.token);
-          setUserData({ email: email });
+          setUserData({email: res.email});
           navigate("/");
-        }
       })
       .catch((err) => {
         setIsSuccessRegister(false);
