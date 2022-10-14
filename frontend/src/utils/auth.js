@@ -23,7 +23,7 @@ export function register({ email, password }) {
 export function signin({ email, password }) {
   return fetch(`${baseAuthUrl}/signin`, {
     method: "POST",
-    сredentials: "include",
+    credentials: "include",
     headers: {
       'Accept': 'application/json',
       "Content-Type": "application/json",
