@@ -3,6 +3,10 @@
   
 Пожалуйста, прикрепите в это описание ссылку на сайт, размещенный на Яндекс.Облаке.
 
-IP 51.250.94.77
-Frontend https://uralyanka.mesto.nomoredomains.icu
-Backend https://api.uralyanka.mesto.nomoredomains.icu
+:link: репозиторий проекта [линк](https://github.com/uralyanka/react-mesto-api-full)
+
+:link: IP 51.250.94.77
+
+:link: Frontend https://uralyanka.mesto.nomoredomains.icu
+
+:link: Backend https://api.uralyanka.mesto.nomoredomains.icu

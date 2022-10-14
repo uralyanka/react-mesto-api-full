@@ -56,9 +56,7 @@ export default function Content() {
     api
       .getUserData()
       .then((userInfo) => {
-        setCurrentUser({
-          ...userInfo,
-        });
+        setCurrentUser(userInfo.data);
       })
       .catch((err) => {
         console.log(err);
@@ -69,7 +67,7 @@ export default function Content() {
   useEffect(() => {
     api
       .getCards()
-      .then((cards) => setCards([...cards]))
+      .then((cards) => setCards(cards.data))
       .catch((err) => {
         console.log(err);
       });
@@ -107,7 +105,7 @@ export default function Content() {
 
   //Лайк карточке с api
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
 
     api
       .likeSwitcher(card._id, isLiked)
