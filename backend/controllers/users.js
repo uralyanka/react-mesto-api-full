@@ -5,7 +5,6 @@ const NotFoundError = require('../errors/notFoundError');
 const ValidationError = require('../errors/validationError');
 const ConflictError = require('../errors/conflictError');
 const UnauthorizedError = require('../errors/unauthorizedError');
-// Удалена проверка на ошибку CastError в методе обновления текущего пользователя
 
 module.exports.getAllUsers = (req, res, next) => {
   User.find({})
@@ -132,6 +131,7 @@ module.exports.login = (req, res, next) => {
         about: user.about,
         avatar: user.avatar,
         email: user.email,
+        token,
       });
     })
     .catch(next);

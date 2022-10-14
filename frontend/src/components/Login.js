@@ -25,7 +25,7 @@ export default function Login({ handleLogin }) {
     <main className="content content_type_auth">
       <AuthForm
         title="Вход"
-        buttonText="Войти"
+        buttonText="АБРАКАДАБРА"
         onSubmit={handleSignin}
       >
         <input

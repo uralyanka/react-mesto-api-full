@@ -65,30 +65,33 @@ export default function App() {
   //аутентификация при повторном входе
   function handleCheckToken() {
     auth
-      .getContent()
-        .then(() => {
-          setLoggedIn(true);
-          navigate("/");
-        })
-        .catch((err) => {
-          navigate("/sign-in");
-          if (err === "Ошибка: 400")
-            return console.log("Токен не передан или передан не в том формате");
-          if (err === "Ошибка: 401")
-            return console.log("Переданный токен некорректен");
-          console.log(err);
-        });
-  };
+    .getContent()
+    .then((res) => {
+      setLoggedIn(true);
+      setUserData(res.data);
+      navigate("/");
+    })
+    .catch((err) => {
+      if (err === "Ошибка: 400")
+      return console.log("Токен не передан или передан не в том формате");
+      if (err === "Ошибка: 401")
+      return console.log("Переданный токен некорректен");
+      console.log(err);
+    });
+  }
 
   useEffect(() => {
     handleCheckToken();
   }, []);
 
   function handleLogOut() {
-    localStorage.removeItem("token");
-    setLoggedIn(false);
-    setUserData({});
-    navigate("/sign-in");
+    auth.signout()
+      .then((res) => {
+        setLoggedIn(false);
+        setUserData({});
+        navigate("/sign-in");
+      })
+      .catch((err) => console.log(err));
   }
 
   return (

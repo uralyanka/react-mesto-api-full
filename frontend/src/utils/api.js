@@ -17,7 +17,7 @@ class Api {
   getUserData() {
     return fetch(this._userUrl, {
       method: "GET",
-      credentials: 'include',
+      сredentials: "include",
       headers: this._headers,
     }).then((res) => this._checkRes(res));
   }
@@ -25,7 +25,7 @@ class Api {
   getCards() {
     return fetch(this._cardsUrl, {
       method: "GET",
-      credentials: 'include',
+      сredentials: "include",
       headers: this._headers,
     }).then((res) => this._checkRes(res));
   }
@@ -33,7 +33,7 @@ class Api {
   setUserData(name, about) {
     return fetch(this._userUrl, {
       method: "PATCH",
-      credentials: 'include',
+      сredentials: "include",
       headers: this._headers,
       body: JSON.stringify({
         name,
@@ -45,7 +45,7 @@ class Api {
   addCard(cardData) {
     return fetch(this._cardsUrl, {
       method: "POST",
-      credentials: 'include',
+      сredentials: "include",
       headers: this._headers,
       body: JSON.stringify({
         name: cardData.cardName,
@@ -58,7 +58,7 @@ class Api {
     return fetch(`${this._cardsUrl}/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-      credentials: 'include'
+      сredentials: "include",
     }).then((res) => this._checkRes(res));
   }
 
@@ -66,13 +66,13 @@ class Api {
     if (isLiked) {
       return fetch(`${this._cardsUrl}/${cardId}/likes`, {
         method: "DELETE",
-        credentials: 'include',
+        сredentials: "include",
         headers: this._headers,
       }).then((res) => this._checkRes(res));
     } else {
       return fetch(`${this._cardsUrl}/${cardId}/likes`, {
         method: "PUT",
-        credentials: 'include',
+        сredentials: "include",
         headers: this._headers,
       }).then((res) => this._checkRes(res));
     }
@@ -81,7 +81,7 @@ class Api {
   updateAvatar(avatar) {
     return fetch(`${this._userUrl}/avatar`, {
       method: "PATCH",
-      credentials: 'include',
+      сredentials: "include",
       headers: this._headers,
       body: JSON.stringify({
         avatar,

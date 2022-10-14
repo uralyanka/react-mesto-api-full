@@ -11,8 +11,9 @@ function checkRes(res) {
 export function register({ email, password }) {
   return fetch(`${baseAuthUrl}/signup`, {
     method: "POST",
-    credentials: 'include',
+    credentials: "include",
     headers: {
+      'Accept': 'application/json',
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
@@ -22,8 +23,9 @@ export function register({ email, password }) {
 export function signin({ email, password }) {
   return fetch(`${baseAuthUrl}/signin`, {
     method: "POST",
-    redentials: 'include',
+    сredentials: "include",
     headers: {
+      'Accept': 'application/json',
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
@@ -33,19 +35,21 @@ export function signin({ email, password }) {
 export function getContent() {
   return fetch(`${baseAuthUrl}/users/me`, {
     method: "GET",
-    credentials: 'include',
     headers: {
+      'Accept': 'application/json',
       "Content-Type": "application/json",
     },
+    credentials: "include",
   }).then((res) => checkRes(res))
 }
 
 export function signout() {
   return fetch(`${baseAuthUrl}/signout`, {
-      method: "POST",
-      credentials:'include',
+      method: "GET",
       headers: {
-          'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        "Content-Type": "application/json",
       },
+      credentials: "include",
     }).then((res) => checkRes(res))
 };
