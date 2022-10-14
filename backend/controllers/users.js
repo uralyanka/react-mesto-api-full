@@ -4,7 +4,9 @@ const User = require('../models/user');
 const NotFoundError = require('../errors/notFoundError');
 const ValidationError = require('../errors/validationError');
 const ConflictError = require('../errors/conflictError');
-const UnauthorizedError = require('../errors/unauthorizedError');
+// const UnauthorizedError = require('../errors/unauthorizedError');
+
+require('dotenv').config();
 
 module.exports.getAllUsers = (req, res, next) => {
   User.find({})
@@ -113,26 +115,30 @@ module.exports.updateUserAvatar = (req, res, next) => {
     });
 };
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+const secretKey = NODE_ENV === 'production' ? JWT_SECRET : 'secret-key';
+
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign(
-        { _id: user._id },
-        'some-secret-key',
-        { expiresIn: '7d' },
-      );
-      if (!token) {
-        next(new UnauthorizedError('401 - Ошибка при создании токена'));
-      }
-      res.cookie('jwt', token, { maxAge: 3600000 * 24 * 7, httpOnly: true }).send({
-        _id: user._id,
-        name: user.name,
-        about: user.about,
-        avatar: user.avatar,
-        email: user.email,
-        token,
+      const token = jwt.sign({ _id: user._id }, secretKey, { expiresIn: '7d' });
+      // eslint-disable-next-line no-console
+      console.log('qweqwe = ', secretKey);
+      res.cookie('jwt', token, {
+        maxAge: 3600000 * 24 * 7,
+        httpOnly: true,
       });
+      res.send({ token });
     })
     .catch(next);
+};
+
+module.exports.signout = (req, res) => {
+  res.cookie('jwt', 'token', {
+    maxAge: -1,
+    httpOnly: true,
+  });
+  res.status(200)
+    .send({ message: 'Вы вышли из аккаунта' });
 };
