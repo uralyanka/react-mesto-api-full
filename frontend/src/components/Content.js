@@ -120,13 +120,13 @@ export default function Content() {
   }
 
   //Удаление карточки в попапе подтверждения удаления с api
-  function handleCardDeleteConfirm(card) {
+  function handleCardDeleteConfirm() {
     api
-      .deleteCard(card._id)
+      .deleteCard(currentCard._id)
       .then(() => {
         setCards((state) =>
           state.filter((c) => {
-            return c._id !== card._id;
+            return c._id !== currentCard._id;
           })
         );
         setCurrentCard({});
